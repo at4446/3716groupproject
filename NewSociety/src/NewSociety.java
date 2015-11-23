@@ -1,3 +1,8 @@
+/* This class contains the method of newsociety which creates a newsociety
+ * it builds the frame work and it creates a file to store each society 
+ * seperatly into a file containing its societies name*/
+
+
 import javax.swing.*;
 import java.io.*;
 import java.awt.*;
@@ -7,12 +12,14 @@ import java.io.BufferedWriter;
 public class NewSociety implements ActionListener {
     private JFrame frame = new JFrame();
     
+    private JTextField society_name_text;
     private JTextField id_text;
     private JTextField major_text;
     private JTextField desc_text;
     private JTextField contact_text;
     private JTextField name_text;
     
+    private JLabel society_name;
     private JLabel name;
     private JLabel id;
     private JLabel major;
@@ -35,7 +42,7 @@ public class NewSociety implements ActionListener {
         button.addActionListener(this);
         
         //textField
-        
+        society_name_text = new JTextField();
         id_text = new JTextField();
         major_text = new JTextField();
         desc_text = new JTextField();
@@ -43,6 +50,7 @@ public class NewSociety implements ActionListener {
         name_text = new JTextField();
         
         //label
+        society_name = new JLabel("Enter you society name");
         name= new JLabel("Enter your name: ");        
         id= new JLabel("Student ID: ");
         major= new JLabel("Major: ");
@@ -58,7 +66,9 @@ public class NewSociety implements ActionListener {
         
         //ADD labels and input buttons TO PANEL
         input_panel = new JPanel();
-        input_panel.setLayout(new GridLayout(5,2));
+        input_panel.setLayout(new GridLayout(6,2));
+        input_panel.add(society_name);
+        input_panel.add(society_name_text);
         input_panel.add(name);
         input_panel.add(name_text);
         input_panel.add(id);
@@ -75,16 +85,25 @@ public class NewSociety implements ActionListener {
         frame.add(input_panel, BorderLayout.CENTER);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("Create a New Society");
-        final int FRAME_WIDTH = 300;
-    	final int FRAME_HEIGHT = 400;
+        final int FRAME_WIDTH = 600;
+    	final int FRAME_HEIGHT = 600;
+    	frame.setLocation(700, 350);
     	frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);        
         frame.setVisible(true);
     }
 
     // process the button clicks
     public void actionPerformed(ActionEvent event) {
+    	File f = new File(society_name_text.getText().toLowerCase() + ".txt");
+    	if(f.exists() && !f.isDirectory()) { 
+    	    new errormessage();
+    	    frame.dispose();
+    	}
+    	else{
     	try {
-    	   BufferedWriter outfile = new BufferedWriter(new FileWriter("societies.txt"));
+    	   BufferedWriter outfile = new BufferedWriter(new FileWriter(society_name_text.getText().toLowerCase() + ".txt"));
+    	   outfile.append("societies name: ");
+    	   outfile.append(society_name_text.getText());
     	   outfile.append("Students name: ");
     	   outfile.append(name_text.getText());
     	   outfile.append("Students id: ");
@@ -96,7 +115,10 @@ public class NewSociety implements ActionListener {
     	   outfile.append("Contact Info: ");
     	   outfile.append(contact_text.getText());
     	   outfile.close();
+    	   frame.dispose();
+    	   new savemessage();
     	}
+    	
     	   
        catch(FileNotFoundException e) {
            System.out.println("File not found.");
@@ -109,8 +131,5 @@ public class NewSociety implements ActionListener {
        }
     };
 
-    // create one Frame
-    public static void main(String[] args) {
-    	new NewSociety();
     }
-    }
+}
