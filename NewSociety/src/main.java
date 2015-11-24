@@ -1,4 +1,4 @@
-/*This is the main method that starts the program*/
+/*This is the main method that starts the program Amir*/
 
 
 import java.awt.EventQueue;
