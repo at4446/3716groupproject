@@ -3,6 +3,8 @@
  */
 
 import javax.swing.*;
+import javax.swing.border.TitledBorder;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -15,12 +17,12 @@ public class savemessage implements ActionListener {
 	
 	public savemessage(){
 		savemess = new JLabel("You society is saved");
-		
+		  TitledBorder titled = new TitledBorder("Title");
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
         panel.add(savemess, BorderLayout.CENTER);
-		
         button = new JButton("OK");
+        button.setBorder(BorderFactory.createLineBorder(Color.red));
         button.addActionListener(this);
         panel.add(button, BorderLayout.SOUTH);
         

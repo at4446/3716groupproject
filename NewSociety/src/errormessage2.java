@@ -1,4 +1,5 @@
 import javax.swing.*;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -17,6 +18,7 @@ public class errormessage2 implements ActionListener {
         panel.add(savemess, BorderLayout.CENTER);
         
         button = new JButton("OK");
+        button.setBorder(BorderFactory.createLineBorder(Color.red));
         button.addActionListener(this);
         panel.add(button, BorderLayout.SOUTH);
 		

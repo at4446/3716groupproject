@@ -1,9 +1,10 @@
 
 
 	import javax.swing.*;
-	import java.io.*;
-	import java.awt.*;
-	import java.awt.event.*;
+
+import java.io.*;
+import java.awt.*;
+import java.awt.event.*;
 
 	public class deletedmessage implements ActionListener {
 		private JFrame frame = new JFrame();
@@ -13,11 +14,11 @@
 		
 		public deletedmessage(){
 			savemess = new JLabel("Society is deleted");
-			
+			savemess.setForeground(Color.MAGENTA);
 			panel = new JPanel();
 			panel.setLayout(new BorderLayout());
 	        panel.add(savemess, BorderLayout.CENTER);
-	        
+	        button.setBorder(BorderFactory.createLineBorder(Color.red));
 	        button = new JButton("OK");
 	        button.addActionListener(this);
 	        panel.add(button, BorderLayout.SOUTH);

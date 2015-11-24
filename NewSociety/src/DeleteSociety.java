@@ -1,9 +1,11 @@
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,7 +24,8 @@ public class DeleteSociety implements ActionListener {
 	
 		//Create button to click
 		button = new JButton("Delete Society");
-        button.addActionListener(this);
+		button.addActionListener(this);
+		button.setBorder(BorderFactory.createLineBorder(Color.blue));
         
         //Create label and text field
         label = new JLabel("What is the name of the society you wish to delete");

@@ -4,6 +4,7 @@
 
 
 import javax.swing.*;
+
 import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -40,6 +41,7 @@ public class NewSociety implements ActionListener {
         // the clickable button
         button = new JButton("Save Society");
         button.addActionListener(this);
+        button.setBorder(BorderFactory.createLineBorder(Color.red));
         
         //textField
         society_name_text = new JTextField();
