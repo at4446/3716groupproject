@@ -5,22 +5,27 @@ import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.GraphicsConfigTemplate;
-
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.border.TitledBorder;
 
 import java.awt.Graphics;
 public class Start_window {
 
 	JFrame frame;
+
 
 	/**
 	 * Create the application.
@@ -40,11 +45,24 @@ public class Start_window {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 		frame.setVisible(true);
+		frame.setBackground(Color.BLUE);
+		
+		//Login button
+		JButton loginButton = new JButton("Login");
+		JButton registerButton = new JButton("Register/New User");
+		loginButton.setBounds(225,273,146,25);
+		frame.add(loginButton);
+		registerButton.setBounds(75,273,146,25);
+		frame.add(registerButton);
+
+
+		
+		
 		
 		//Creates create society button
 		JButton btnNewButton = new JButton("Create Society");
 		btnNewButton.setBorder(BorderFactory.createLineBorder(Color.red));
-		btnNewButton.setBackground(Color.orange);
+		
 		btnNewButton.addActionListener(new ActionListener() {
 			//Performs the button click
 			public void actionPerformed(ActionEvent event1) {
@@ -60,6 +78,14 @@ public class Start_window {
 		
 		JButton btnJoinSociety = new JButton("Join Society");
 		btnJoinSociety.setBorder(BorderFactory.createLineBorder(Color.red));
+
+		//performs button click
+		btnJoinSociety.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				frame.dispose();
+				new JoinSociety();
+			}
+		});
 		
 		btnJoinSociety.setBackground(Color.orange);
 		btnJoinSociety.setBounds(145, 111, 146, 25);
@@ -102,5 +128,15 @@ public class Start_window {
 		});
 		btnDeleteSociety.setBounds(145, 223, 146, 25);
 		frame.getContentPane().add(btnDeleteSociety);
+		
+
+    //Set Return
 	}
+	//backgrd
+  
+	
+	
+	
+
+
 }

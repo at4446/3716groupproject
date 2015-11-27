@@ -9,9 +9,11 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
+import java.util.ArrayList;
 
 public class NewSociety implements ActionListener {
-    private JFrame frame = new JFrame();
+		private static ArrayList<String> societies;
+    public JFrame nsframe = new JFrame();
     
     private JTextField society_name_text;
     private JTextField id_text;
@@ -37,14 +39,14 @@ public class NewSociety implements ActionListener {
 
     public NewSociety() {
     	
-
+    		societies=new ArrayList<String>();
         // the clickable button
         button = new JButton("Save Society");
         button.addActionListener(this);
         button.setBorder(BorderFactory.createLineBorder(Color.red));
         
         //textField
-        society_name_text = new JTextField();
+        society_name_text = new JTextField(15);
         id_text = new JTextField();
         major_text = new JTextField();
         desc_text = new JTextField();
@@ -62,13 +64,13 @@ public class NewSociety implements ActionListener {
 
         // the panel with the button and text
         buttonpanel = new JPanel();
-        buttonpanel.setLayout(new BorderLayout());
+        buttonpanel.setLayout(new GridLayout());
         buttonpanel.add(button, BorderLayout.SOUTH);       
         
         
         //ADD labels and input buttons TO PANEL
         input_panel = new JPanel();
-        input_panel.setLayout(new GridLayout(6,2));
+        input_panel.setLayout(new GridLayout(0,1));
         input_panel.add(society_name);
         input_panel.add(society_name_text);
         input_panel.add(name);
@@ -81,17 +83,20 @@ public class NewSociety implements ActionListener {
         input_panel.add(desc_text);
         input_panel.add(contact);
         input_panel.add(contact_text);
+        input_panel.add(buttonpanel);
 
         // set up the frame and display it
-        frame.add(buttonpanel, BorderLayout.SOUTH);
-        frame.add(input_panel, BorderLayout.CENTER);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setTitle("Create a New Society");
+        //frame.add(buttonpanel, BorderLayout.SOUTH);
+    		//frame.getContentPane().add(buttonpanel);
+        nsframe.add(input_panel, BorderLayout.CENTER);
+        nsframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        nsframe.setTitle("Create a New Society");
         final int FRAME_WIDTH = 600;
-    	final int FRAME_HEIGHT = 600;
-    	frame.setLocation(700, 350);
-    	frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);        
-        frame.setVisible(true);
+        final int FRAME_HEIGHT = 600;
+        nsframe.setLocation(400, 200);
+        nsframe.setSize(FRAME_WIDTH, FRAME_HEIGHT);        
+        nsframe.setVisible(true);
+        nsframe.setBackground(Color.BLACK);
     }
 
     // process the button clicks
@@ -99,7 +104,7 @@ public class NewSociety implements ActionListener {
     	File f = new File(society_name_text.getText().toLowerCase() + ".txt");
     	if(f.exists() && !f.isDirectory()) { 
     	    new errormessage();
-    	    frame.dispose();
+    	    nsframe.dispose();
     	}
     	else{
     	try {
@@ -117,8 +122,9 @@ public class NewSociety implements ActionListener {
     	   outfile.append("Contact Info: ");
     	   outfile.append(contact_text.getText());
     	   outfile.close();
-    	   frame.dispose();
+    	   nsframe.dispose();
     	   new savemessage();
+    	   societies.add(society_name_text.getText());
     	}
     	
     	   
@@ -134,4 +140,13 @@ public class NewSociety implements ActionListener {
     };
 
     }
+
+
+public static String getSocieties(){
+	for(int i=0; i<societies.size() ; i++)
+			//System.out.println(societies.get(i).toString());
+			return societies.get(i).toString();
+			return null;
+		
+	}
 }

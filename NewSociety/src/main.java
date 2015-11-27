@@ -13,6 +13,7 @@ public class main {
 				try {
 					Start_window window = new Start_window(); // Calls the start window method
 					window.frame.setVisible(true);
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
