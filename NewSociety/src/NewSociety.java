@@ -60,12 +60,16 @@ public class NewSociety implements ActionListener{
         major= new JLabel("Major: ");
         desc= new JLabel("Description: ");
         contact= new JLabel("Contact Info: ");
-
-
-        // the panel with the button and text
-        buttonpanel = new JPanel();
-        buttonpanel.setLayout(new GridLayout());
-        buttonpanel.add(button, BorderLayout.SOUTH);       
+        
+        //home button
+        JButton backButton= new JButton("Go back");
+    		backButton.addActionListener(new ActionListener(){
+    			public void actionPerformed(ActionEvent e){
+    				nsframe.dispose();
+    				new Start_window();
+    				//new NewSo
+    			}
+    		});
         
         
         //ADD labels and input buttons TO PANEL
@@ -83,11 +87,12 @@ public class NewSociety implements ActionListener{
         input_panel.add(desc_text);
         input_panel.add(contact);
         input_panel.add(contact_text);
-        input_panel.add(buttonpanel);
-
+        input_panel.add(button);
+        input_panel.add(backButton, BorderLayout.EAST);
         // set up the frame and display it
         //frame.add(buttonpanel, BorderLayout.SOUTH);
     		//frame.getContentPane().add(buttonpanel);
+        nsframe.setLayout(new GridLayout(0,2));
         nsframe.add(input_panel, BorderLayout.CENTER);
         nsframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nsframe.setTitle("Create a New Society");

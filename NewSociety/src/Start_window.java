@@ -11,10 +11,12 @@ import javax.imageio.ImageIO;
 import javax.swing.AbstractButton;
 import javax.swing.JFrame;
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
@@ -50,21 +52,19 @@ public class Start_window {
 		frame.setVisible(true);
 		frame.setBackground(Color.BLUE);
 		
-		//Login button
-		JButton loginButton = new JButton("Login");
-		JButton registerButton = new JButton("Register/New User");
-		loginButton.setBounds(225,273,146,25);
-		frame.add(loginButton);
-		registerButton.setBounds(75,273,146,25);
-		frame.add(registerButton);
-
-
+		//background image
+		try {
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/Users/mariaaloysius/git/3716/NewSociety/src/img.jpg")))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		
 		
 		
 		//Creates create society button
 		JButton btnNewButton = new JButton("Create Society");
-		btnNewButton.setBorder(BorderFactory.createLineBorder(Color.red));
+		//btnNewButton.setBorder(BorderFactory.createLineBorder(Color.red));
 		
 		btnNewButton.addActionListener(new ActionListener() {
 			//Performs the button click
@@ -74,13 +74,13 @@ public class Start_window {
 			}
 		});
 		
-		btnNewButton.setBounds(145, 73, 146, 25);
+		btnNewButton.setBounds(10, 73, 146, 25);
 		frame.getContentPane().add(btnNewButton);
 		
 		//Creates Jin society button
 		
 		JButton btnJoinSociety = new JButton("Join Society");
-		btnJoinSociety.setBorder(BorderFactory.createLineBorder(Color.red));
+		//btnJoinSociety.setBorder(BorderFactory.createLineBorder(Color.red));
 
 		//performs button click
 		btnJoinSociety.addActionListener(new ActionListener(){
@@ -89,38 +89,34 @@ public class Start_window {
 				new JoinSociety();
 			}
 		});
-		
-		btnJoinSociety.setBackground(Color.orange);
-		btnJoinSociety.setBounds(145, 111, 146, 25);
+
+		btnJoinSociety.setBounds(335, 73, 146, 25);
 		frame.getContentPane().add(btnJoinSociety);
 		
 		//Creates Hold election button
 		JButton btnHoldElection = new JButton("Hold Election");
-		btnHoldElection.setBounds(145, 149, 146, 25);
-		btnHoldElection.setBorder(BorderFactory.createLineBorder(Color.red));
-		btnHoldElection.setBackground(Color.orange);
+		btnHoldElection.setBounds(10, 149, 146, 25);
+		//btnHoldElection.setBorder(BorderFactory.createLineBorder(Color.red));
 		frame.getContentPane().add(btnHoldElection);
 		
 		//Creates Message Society button
-		JButton btnMessageSociety = new JButton("Message Society");
-		btnMessageSociety.setBounds(145, 185, 146, 25);
-		btnMessageSociety.setBorder(BorderFactory.createLineBorder(Color.red));
-		btnMessageSociety.setBackground(Color.orange);
-		frame.getContentPane().add(btnMessageSociety);
+		JButton btnEvent = new JButton("Events");
+		btnEvent.setBounds(335, 149, 146, 25);
+		//btnMessageSociety.setBorder(BorderFactory.createLineBorder(Color.red));
+		frame.getContentPane().add(btnEvent);
 		
 		//Creates Label
 
 		 
-		JLabel lblWhatWouldYou = new JLabel("What would you like to do?");
-		lblWhatWouldYou.setBounds(132, 27, 175, 16);
+		JLabel lblWhatWouldYou = new JLabel("MUN Society Management");
+		lblWhatWouldYou.setBounds(162, 27, 175, 16);
 
-		lblWhatWouldYou.setForeground(Color.RED);
+		lblWhatWouldYou.setForeground(Color.BLACK);
 		frame.getContentPane().add(lblWhatWouldYou);
 		
 		//Creates Delete society button
 		JButton btnDeleteSociety = new JButton("Delete Society");
-		btnDeleteSociety.setBorder(BorderFactory.createLineBorder(Color.red));
-		btnDeleteSociety.setBackground(Color.orange);
+		//btnDeleteSociety.setBorder(BorderFactory.createLineBorder(Color.red));
 		btnDeleteSociety.addActionListener(new ActionListener() {
 			
 			//Performs the action of the button clicked
@@ -129,13 +125,18 @@ public class Start_window {
 				new DeleteSociety();
 			}
 		});
-		btnDeleteSociety.setBounds(145, 223, 146, 25);
+		btnDeleteSociety.setBounds(10, 223, 146, 25);
 		frame.getContentPane().add(btnDeleteSociety);
 		
+		//Exit button
+		//Login button
+		JButton exitButton = new JButton("Exit");
+		exitButton.setBounds(335,223,146,25);
+		frame.add(exitButton);
 
-    //Set Return
+		
 	}
-	//backgrd
+	
   
 	
 	
