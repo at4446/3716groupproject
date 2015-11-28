@@ -1,36 +1,98 @@
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class JoinSociety{
-	private JList<String> list;
+	private JComboBox list;
 	private JButton backButton;
 	private JLabel search;
 	private JPanel joinPanel;
 	private JFrame joinFrame;
 	private String[] societies;
+	private JButton joinButton;
+	private String memberName, selectedValue;
+	
 	
 	public JoinSociety(){
 		
-		
-		societies= new String[10];
-				for (int i=0; i<societies.length; i++){
-					societies[i]= "Stic";
+		//reading every line from text file into an ArrayList strings
+		BufferedReader input = null;
+		try {
+			input = new BufferedReader(new FileReader("./societies.txt"));
+		}
+		catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		ArrayList<String> strings = new ArrayList<String>();
+		try{
+				String line = null;
+				while ((line = input.readLine()) != null){
+					strings.add(line);
 				}
-		list = new JList<String>(societies);
+			}
+		catch(IOException e){
+			System.err.println("Error, file didn't exist");
+			}
+		finally{
+			try {
+				input.close();
+			}
+			catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+		
+		
+		//changing the strings in the arraylist to an array 
+		String[] societiesArray = strings.toArray(new String[]{});
+		
+		
+		
+		//adding the array to the the combobox
+		list = new JComboBox(societiesArray);
 		backButton = new JButton("Home Page");
 		
 		search = new JLabel("Search Society");
+		
+		//joinButton
+		joinButton= new JButton("Join me");
+		joinButton.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e1){
+				selectedValue = list.getSelectedItem().toString();
+				memberName= JOptionPane.showInputDialog("Please input your name:");
+				System.out.println("The member name is: " + memberName);
+				addMember();
+			}
+		});
+		
+		
+		
+		
+		
+		
 		
 		//button functionality
 		backButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				joinFrame.dispose();
+				new Start_window();
 				//new NewSo
 			}
 		});
@@ -42,6 +104,7 @@ public class JoinSociety{
 		joinPanel.add(search);
 		joinPanel.add(list, BorderLayout.AFTER_LAST_LINE);
 		joinPanel.add(backButton, BorderLayout.SOUTH);
+		joinPanel.add(joinButton);
 		
 		
 	//add to frame
@@ -54,5 +117,21 @@ public class JoinSociety{
 		joinFrame.setSize(600, 600);
 	}
 
-
+	public void addMember(){
+			BufferedReader bf = null; 
+			//adding member to the society
+ 	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./" + selectedValue+".txt",true)))) {
+  		  out.println(memberName);
+  		  JOptionPane.showMessageDialog(joinButton,"Welcome to, " +selectedValue+ "! You're succesfully added.");
+  	  	}
+  	  catch (IOException e) {
+  		  System.out.println("IO Exception.");  
+  	  	}
+			
+		}
+	
+	
+	
 }
+
+

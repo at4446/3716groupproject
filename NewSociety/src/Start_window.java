@@ -15,6 +15,7 @@ import javax.swing.JButton;
 
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
@@ -25,6 +26,7 @@ import java.awt.Graphics;
 public class Start_window {
 
 	JFrame frame;
+	private ArrayList<String> societies;
 
 
 	/**
@@ -32,6 +34,7 @@ public class Start_window {
 	 */
 	public Start_window() {
 		initialize(); // Calls initialize
+		
 	}
 
 	/**

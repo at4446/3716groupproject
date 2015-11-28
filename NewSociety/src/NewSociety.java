@@ -11,8 +11,8 @@ import java.awt.event.*;
 import java.io.BufferedWriter;
 import java.util.ArrayList;
 
-public class NewSociety implements ActionListener {
-		private static ArrayList<String> societies;
+public class NewSociety implements ActionListener{
+		
     public JFrame nsframe = new JFrame();
     
     private JTextField society_name_text;
@@ -38,8 +38,8 @@ public class NewSociety implements ActionListener {
     
 
     public NewSociety() {
-    	
-    		societies=new ArrayList<String>();
+    		
+
         // the clickable button
         button = new JButton("Save Society");
         button.addActionListener(this);
@@ -124,7 +124,15 @@ public class NewSociety implements ActionListener {
     	   outfile.close();
     	   nsframe.dispose();
     	   new savemessage();
-    	   societies.add(society_name_text.getText());
+    	   //updating the list of socities
+    	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./societies.txt",true)))) {
+     		  out.println(society_name_text.getText());
+     		  System.out.print("The society is added into the existing societies");
+     	  }
+     	  catch (IOException e) {
+     		  System.out.println("IO Exception.");  
+     	  }
+    	   				
     	}
     	
     	   
@@ -142,11 +150,4 @@ public class NewSociety implements ActionListener {
     }
 
 
-public static String getSocieties(){
-	for(int i=0; i<societies.size() ; i++)
-			//System.out.println(societies.get(i).toString());
-			return societies.get(i).toString();
-			return null;
-		
-	}
 }
