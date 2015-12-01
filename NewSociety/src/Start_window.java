@@ -53,12 +53,12 @@ public class Start_window {
 		frame.setBackground(Color.BLUE);
 		
 		//background image
-		try {
-			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/Users/mariaaloysius/git/3716/NewSociety/src/img.jpg")))));
+		/*try {
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img.jpg")))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}
+		}*/
 		
 		
 		
@@ -122,7 +122,12 @@ public class Start_window {
 			//Performs the action of the button clicked
 			public void actionPerformed(ActionEvent e) {
 				frame.dispose();
-				new DeleteSociety();
+				try {
+					new DeleteSociety();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 		btnDeleteSociety.setBounds(10, 223, 146, 25);

@@ -1,0 +1,1 @@
+societies name: munStudents name: Students id: Major: Description: Contact Info: 
