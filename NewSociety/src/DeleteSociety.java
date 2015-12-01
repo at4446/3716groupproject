@@ -3,33 +3,152 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
+import java.util.ArrayList;
+import java.io.*;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
-public class DeleteSociety implements ActionListener {
+
+public class DeleteSociety  {
 	private JFrame frame = new JFrame();
 	private JLabel label;
 	private JButton button;
-	private JTextField text;
+	private JComboBox combo;
 	private JPanel panel;
 	private JPanel button_panel;
+	private String contents;
+	private BufferedReader reader;
+	private BufferedWriter writer;
 	
-	public DeleteSociety(){
 	
-		//Create button to click
-		button = new JButton("Delete Society");
-		button.addActionListener(this);
-		button.setBorder(BorderFactory.createLineBorder(Color.blue));
+
+	public DeleteSociety() throws IOException{
         
-        //Create label and text field
-        label = new JLabel("What is the name of the society you wish to delete");
-        text = new JTextField();
+        //Create label
+        label = new JLabel("Select the name of the Society you would like to delete");
+        
+        //Set up combobox
+        
+        
+        BufferedReader input = new BufferedReader(new FileReader("societies.txt"));
+        ArrayList<String> strings = new ArrayList<String>();
+        try {
+          String line = null;
+          while (( line = input.readLine()) != null){
+            strings.add(line);
+          }
+        }
+
+        catch (FileNotFoundException e) {
+            System.err.println("Error, file " + "societies.txt" + " didn't exist.");
+        }
+        
+            try {
+				input.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+        
+
+        String[] lineArray = strings.toArray(new String[]{});
+
+        combo = new JComboBox(lineArray);
+      
+        //Create button to click
+      		button = new JButton("Delete Society");
+      		button.addActionListener(new ActionListener(){
+      			public void actionPerformed(ActionEvent e1){
+      				contents = combo.getSelectedItem().toString();
+      				File f = new File(contents + ".txt");
+      		      	if(f.exists() && !f.isDirectory()) { 
+      		      		f.delete();
+      		      		/*File fi= new File("societies.txt");
+      		      		
+							try {
+								reader= new BufferedReader(new FileReader(fi));
+							} catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							
+								
+									try {
+										for (String line; (line= reader.readLine())!=null;){
+											line= line.replace(contents, "");
+											System.out.println("done");
+										}
+									} catch (IOException e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}*/
+      		      	
+      		      	File inputFile = new File("societies.txt");
+          		    File tempFile = new File("myTempFile.txt");
+
+          		    
+    				try {
+    					reader = new BufferedReader(new FileReader(inputFile));
+    				} catch (FileNotFoundException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+          		   
+    				try {
+    					writer = new BufferedWriter(new FileWriter(tempFile));
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+
+          		    String lineToRemove = contents;
+          		    String currentLine;
+
+          		    try {
+    					while((currentLine = reader.readLine()) != null) {
+    					    // trim newline when comparing with lineToRemove
+    					    String trimmedLine = currentLine.trim();
+    					    if(trimmedLine.equals(lineToRemove)) continue;
+    					    writer.write(currentLine + System.getProperty("line.separator"));
+    					}
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+          		    try {
+    					writer.close();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				} 
+          		    try {
+    					reader.close();
+    				} catch (IOException e) {
+    					// TODO Auto-generated catch block
+    					e.printStackTrace();
+    				}
+          		            				
+          		inputFile.delete();
+          		tempFile.renameTo(inputFile);
+      		      		frame.dispose();
+      		      		new deletedmessage();
+      		      	}
+      		      	
+      		       
+      		      	else{
+      		      		frame.dispose();
+      		      		new errormessage2();
+      		      	};
+      		    
+      			}});
+      		button.setBorder(BorderFactory.createLineBorder(Color.blue));
+      		
+      		
         
         //Add button to South position of panel
         button_panel = new JPanel();
@@ -40,7 +159,7 @@ public class DeleteSociety implements ActionListener {
         panel = new JPanel();
         panel.setLayout(new GridLayout(6,2));
         panel.add(label);
-        panel.add(text);
+        panel.add(combo);
         
      // set up the frame and display it
         frame.add(button_panel, BorderLayout.SOUTH);
@@ -56,17 +175,8 @@ public class DeleteSociety implements ActionListener {
 
 }
 
-	public void actionPerformed(ActionEvent e) {
-		File f = new File(text.getText().toLowerCase() + ".txt");
-      	if(f.exists() && !f.isDirectory()) { 
-      		f.delete();
-      		frame.dispose();
-      		new deletedmessage();
-      	}
-      	else{
-      		frame.dispose();
-      		new errormessage2();
-      	}
-		
-	}
+	
+
+	
+	
 }
