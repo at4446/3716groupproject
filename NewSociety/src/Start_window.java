@@ -53,12 +53,12 @@ public class Start_window {
 		frame.setBackground(Color.BLUE);
 		
 		//background image
-		/*try {
-			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("img.jpg")))));
+		try {
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/Users/JY/git/3716groupproject/NewSociety/src/img.jpg")))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
-		}*/
+		}
 		
 		
 		
