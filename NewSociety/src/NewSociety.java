@@ -9,9 +9,8 @@ import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.BufferedWriter;
-import java.util.ArrayList;
 
-public class NewSociety implements ActionListener{
+public class NewSociety extends society implements ActionListener{
 		
     public JFrame nsframe = new JFrame();
     
@@ -31,7 +30,7 @@ public class NewSociety implements ActionListener{
     
     private JButton button;
     
-    private JPanel buttonpanel;
+    
     private JPanel input_panel;
     
     
@@ -127,8 +126,11 @@ public class NewSociety implements ActionListener{
     	   outfile.append("Contact Info: ");
     	   outfile.append(contact_text.getText());
     	   outfile.close();
+    	   setPres(name_text.getText());
+    	   System.out.println(getPres());
     	   nsframe.dispose();
     	   new savemessage();
+    	   new Start_window();
     	   //updating the list of socities
     	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./societies.txt",true)))) {
      		  out.println(society_name_text.getText());

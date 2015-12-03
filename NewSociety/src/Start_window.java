@@ -1,16 +1,7 @@
 /*This class contains the method for creating the first window to select create society and etc*/
 import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.EventQueue;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.GraphicsConfigTemplate;
-import java.awt.Image;
-import java.awt.Toolkit;
 import javax.imageio.ImageIO;
-import javax.swing.AbstractButton;
 import javax.swing.JFrame;
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -21,11 +12,9 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
+public class Start_window extends society {
 
-import java.awt.Graphics;
-public class Start_window {
+	
 
 	JFrame frame;
 	private ArrayList<String> societies;
@@ -99,6 +88,17 @@ public class Start_window {
 		//btnHoldElection.setBorder(BorderFactory.createLineBorder(Color.red));
 		frame.getContentPane().add(btnHoldElection);
 		
+		//performs button click
+		btnHoldElection.addActionListener(new ActionListener(){
+
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				new holdElection();
+				
+			}
+			
+		});
+		
 		//Creates Message Society button
 		JButton btnEvent = new JButton("Events");
 		btnEvent.setBounds(335, 149, 146, 25);
@@ -121,13 +121,18 @@ public class Start_window {
 			
 			//Performs the action of the button clicked
 			public void actionPerformed(ActionEvent e) {
-				frame.dispose();
 				try {
-					new DeleteSociety();
-				} catch (IOException e1) {
+					deleteAuthorization();
+					
+				} catch (IOException e2) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}
+					e2.printStackTrace();
+				}//calls method to see if you are allowed to delete
+				frame.dispose();
+				
+				
+					
+				
 			}
 		});
 		btnDeleteSociety.setBounds(10, 223, 146, 25);

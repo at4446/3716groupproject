@@ -17,7 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class JoinSociety{
+public class JoinSociety extends society{
 	private JComboBox list;
 	private JButton backButton;
 	private JLabel search;
@@ -78,7 +78,7 @@ public class JoinSociety{
 				selectedValue = list.getSelectedItem().toString();
 				memberName= JOptionPane.showInputDialog("Please input your name:");
 				System.out.println("The member name is: " + memberName);
-				addMember();
+				setMembers(selectedValue ,memberName);
 			}
 		});
 		
@@ -117,7 +117,7 @@ public class JoinSociety{
 		joinFrame.setSize(600, 600);
 	}
 
-	public void addMember(){
+	/*public void addMember(){
 			BufferedReader bf = null; 
 			//adding member to the society
  	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./" + selectedValue+".txt",true)))) {
@@ -128,7 +128,7 @@ public class JoinSociety{
   		  System.out.println("IO Exception.");  
   	  	}
 			
-		}
+		}*/
 	
 	
 	

@@ -14,7 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
-public class DeleteSociety  {
+public class DeleteSociety extends society{
 	private JFrame frame = new JFrame();
 	private JLabel label;
 	private JButton button;
@@ -28,7 +28,11 @@ public class DeleteSociety  {
 	
 
 	public DeleteSociety() throws IOException{
-        
+		
+		//Checks authorization if name equals president delete is good to go if not not allowed to delete
+		
+		
+		
         //Create label
         label = new JLabel("Select the name of the Society you would like to delete");
         
@@ -67,26 +71,8 @@ public class DeleteSociety  {
       				contents = combo.getSelectedItem().toString();
       				File f = new File(contents + ".txt");
       		      	if(f.exists() && !f.isDirectory()) { 
-      		      		f.delete();
-      		      		/*File fi= new File("societies.txt");
       		      		
-							try {
-								reader= new BufferedReader(new FileReader(fi));
-							} catch (FileNotFoundException e) {
-								// TODO Auto-generated catch block
-								e.printStackTrace();
-							}
-							
-								
-									try {
-										for (String line; (line= reader.readLine())!=null;){
-											line= line.replace(contents, "");
-											System.out.println("done");
-										}
-									} catch (IOException e) {
-										// TODO Auto-generated catch block
-										e.printStackTrace();
-									}*/
+      		      		f.delete();
       		      	
       		      	File inputFile = new File("societies.txt");
           		    File tempFile = new File("myTempFile.txt");
@@ -173,8 +159,10 @@ public class DeleteSociety  {
         
      
 
-}
 
+		
+	}
+	
 	
 
 	

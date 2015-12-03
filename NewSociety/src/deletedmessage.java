@@ -2,7 +2,6 @@
 
 	import javax.swing.*;
 
-import java.io.*;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -18,7 +17,7 @@ import java.awt.event.*;
 			panel = new JPanel();
 			panel.setLayout(new BorderLayout());
 	        panel.add(savemess, BorderLayout.CENTER);
-	        button.setBorder(BorderFactory.createLineBorder(Color.red));
+	        //button.setBorder(BorderFactory.createLineBorder(Color.red));
 	        button = new JButton("OK");
 	        button.addActionListener(this);
 	        panel.add(button, BorderLayout.SOUTH);
