@@ -29,44 +29,43 @@ public class JoinSociety extends society{
 	private String[] societies;
 	private JButton joinButton;
 	private String memberName, selectedValue;
+	private String[] societiesArray;
 	
-	
+	public void readArray(){
+		//reading every line from text file into an ArrayList strings
+				BufferedReader input = null;
+				try {
+					input = new BufferedReader(new FileReader("./societies.txt"));
+				}
+				catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				ArrayList<String> strings = new ArrayList<String>();
+				try{
+						String line = null;
+						while ((line = input.readLine()) != null){
+							strings.add(line);
+						}
+					}
+				catch(IOException e){
+					System.err.println("Error, file didn't exist");
+					}
+				finally{
+					try {
+						input.close();
+					}
+					catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+				}
+				//changing the strings in the arraylist to an array 
+				societiesArray = strings.toArray(new String[]{});
+	}
 	public JoinSociety(){
 		
-		//reading every line from text file into an ArrayList strings
-		BufferedReader input = null;
-		try {
-			input = new BufferedReader(new FileReader("./societies.txt"));
-		}
-		catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		ArrayList<String> strings = new ArrayList<String>();
-		try{
-				String line = null;
-				while ((line = input.readLine()) != null){
-					strings.add(line);
-				}
-			}
-		catch(IOException e){
-			System.err.println("Error, file didn't exist");
-			}
-		finally{
-			try {
-				input.close();
-			}
-			catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-		
-		
-		//changing the strings in the arraylist to an array 
-		String[] societiesArray = strings.toArray(new String[]{});
-		
-		
+		readArray();
 		
 		//adding the array to the the combobox
 		list = new JComboBox(societiesArray);
@@ -86,12 +85,6 @@ public class JoinSociety extends society{
 			}
 		});
 		
-		
-		
-		
-		
-		
-		
 		//button functionality
 		backButton.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -100,8 +93,6 @@ public class JoinSociety extends society{
 				//new NewSo
 			}
 		});
-		
-		
 		
 		//add to panel
 		joinPanel = new JPanel();
@@ -125,23 +116,7 @@ public class JoinSociety extends society{
 		joinFrame.setVisible(true);
 		joinFrame.setLocation(400,200);
 		joinFrame.setSize(600, 600);
-	}
-
-	/*public void addMember(){
-			BufferedReader bf = null; 
-			//adding member to the society
- 	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./" + selectedValue+".txt",true)))) {
-  		  out.println(memberName);
-  		  JOptionPane.showMessageDialog(joinButton,"Welcome to, " +selectedValue+ "! You're succesfully added.");
-  	  	}
-  	  catch (IOException e) {
-  		  System.out.println("IO Exception.");  
-  	  	}
-			
-		}*/
-	
-	
-	
+	}	
 }
 
 

@@ -153,6 +153,15 @@ public class Start_window extends society {
 		JButton exitButton = new JButton("Exit");
 		exitButton.setBounds(335,223,146,25);
 		frame.add(exitButton);
+		exitButton.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				frame.dispose();
+				
+			}
+			
+		});
 
 		
 	}

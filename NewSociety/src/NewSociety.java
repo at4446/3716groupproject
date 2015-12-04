@@ -33,7 +33,57 @@ public class NewSociety extends society implements ActionListener{
     
     private JPanel input_panel;
     
-    
+    //code for creating the society
+    public void createSociety(){
+    File f = new File(society_name_text.getText().toLowerCase() + ".txt");
+	if(f.exists() && !f.isDirectory()) { 
+	    new errormessage();
+	    nsframe.dispose();
+	}
+	else{
+	try {
+	   BufferedWriter outfile = new BufferedWriter(new FileWriter(society_name_text.getText().toLowerCase() + ".txt"));
+	   outfile.append("societies name: ");
+	   outfile.append(society_name_text.getText());
+	   outfile.append("Students name: ");
+	   outfile.append(name_text.getText());
+	   outfile.append("Students id: ");
+	   outfile.append(id_text.getText());
+	   outfile.append("Major: ");
+	   outfile.append(major_text.getText());
+	   outfile.append("Description: ");
+	   outfile.append(desc_text.getText());
+	   outfile.append("Contact Info: ");
+	   outfile.append(contact_text.getText());
+	   outfile.close();
+	   setPres(name_text.getText());
+	   System.out.println(getPres());
+	   nsframe.dispose();
+	   new savemessage();
+	   new Start_window();
+	   //updating the list of socities
+	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./societies.txt",true)))) {
+ 		  out.println(society_name_text.getText());
+ 		  System.out.print("The society is added into the existing societies");
+ 	  }
+ 	  catch (IOException e) {
+ 		  System.out.println("IO Exception.");  
+ 	  }
+	   				
+	}
+	
+	   
+   catch(FileNotFoundException e) {
+       System.out.println("File not found.");
+   }
+   catch(NullPointerException j){
+       System.out.println("Null.");
+   }
+   catch(IOException k){
+       System.out.println("IO Exception.");            
+   }
+};
+    }    
     
 
     public NewSociety() {
@@ -106,55 +156,7 @@ public class NewSociety extends society implements ActionListener{
 
     // process the button clicks
     public void actionPerformed(ActionEvent event) {
-    	File f = new File(society_name_text.getText().toLowerCase() + ".txt");
-    	if(f.exists() && !f.isDirectory()) { 
-    	    new errormessage();
-    	    nsframe.dispose();
-    	}
-    	else{
-    	try {
-    	   BufferedWriter outfile = new BufferedWriter(new FileWriter(society_name_text.getText().toLowerCase() + ".txt"));
-    	   outfile.append("societies name: ");
-    	   outfile.append(society_name_text.getText());
-    	   outfile.append("Students name: ");
-    	   outfile.append(name_text.getText());
-    	   outfile.append("Students id: ");
-    	   outfile.append(id_text.getText());
-    	   outfile.append("Major: ");
-    	   outfile.append(major_text.getText());
-    	   outfile.append("Description: ");
-    	   outfile.append(desc_text.getText());
-    	   outfile.append("Contact Info: ");
-    	   outfile.append(contact_text.getText());
-    	   outfile.close();
-    	   setPres(name_text.getText());
-    	   System.out.println(getPres());
-    	   nsframe.dispose();
-    	   new savemessage();
-    	   new Start_window();
-    	   //updating the list of socities
-    	   try(PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("./societies.txt",true)))) {
-     		  out.println(society_name_text.getText());
-     		  System.out.print("The society is added into the existing societies");
-     	  }
-     	  catch (IOException e) {
-     		  System.out.println("IO Exception.");  
-     	  }
-    	   				
-    	}
-    	
-    	   
-       catch(FileNotFoundException e) {
-           System.out.println("File not found.");
-       }
-       catch(NullPointerException j){
-           System.out.println("Null.");
-       }
-       catch(IOException k){
-           System.out.println("IO Exception.");            
-       }
-    };
-
+    	createSociety();
     }
 
 

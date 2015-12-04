@@ -26,13 +26,72 @@ public class DeleteSociety extends society{
 	private BufferedReader reader;
 	private BufferedWriter writer;
 	
-	
+	//delete method for deleting a society
+	public void delete(String contents){
+	File f = new File(contents + ".txt");
+    	if(f.exists() && !f.isDirectory()) { 
+    		
+    		f.delete();
+    	
+    	File inputFile = new File("societies.txt");
+	    File tempFile = new File("myTempFile.txt");
 
-	public DeleteSociety() throws IOException{
-		
-		//Checks authorization if name equals president delete is good to go if not not allowed to delete
-		
-		
+	    
+	try {
+		reader = new BufferedReader(new FileReader(inputFile));
+	} catch (FileNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	   
+	try {
+		writer = new BufferedWriter(new FileWriter(tempFile));
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+
+	    String lineToRemove = contents;
+	    String currentLine;
+
+	    try {
+		while((currentLine = reader.readLine()) != null) {
+		    // trim newline when comparing with lineToRemove
+		    String trimmedLine = currentLine.trim();
+		    if(trimmedLine.equals(lineToRemove)) continue;
+		    writer.write(currentLine + System.getProperty("line.separator"));
+		}
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	    try {
+		writer.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	    try {
+		reader.close();
+	} catch (IOException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	            				
+	inputFile.delete();
+	tempFile.renameTo(inputFile);
+    		frame.dispose();
+    		new deletedmessage();
+    	}
+    	
+     
+    	else{
+    		frame.dispose();
+    		new errormessage2();
+    	};
+	}
+
+	public DeleteSociety() throws IOException{		
 		
         //Create label
         label = new JLabel("Select the name of the Society you would like to delete");
@@ -72,68 +131,7 @@ public class DeleteSociety extends society{
       		button.addActionListener(new ActionListener(){
       			public void actionPerformed(ActionEvent e1){
       				contents = combo.getSelectedItem().toString();
-      				File f = new File(contents + ".txt");
-      		      	if(f.exists() && !f.isDirectory()) { 
-      		      		
-      		      		f.delete();
-      		      	
-      		      	File inputFile = new File("societies.txt");
-          		    File tempFile = new File("myTempFile.txt");
-
-          		    
-    				try {
-    					reader = new BufferedReader(new FileReader(inputFile));
-    				} catch (FileNotFoundException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-          		   
-    				try {
-    					writer = new BufferedWriter(new FileWriter(tempFile));
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-
-          		    String lineToRemove = contents;
-          		    String currentLine;
-
-          		    try {
-    					while((currentLine = reader.readLine()) != null) {
-    					    // trim newline when comparing with lineToRemove
-    					    String trimmedLine = currentLine.trim();
-    					    if(trimmedLine.equals(lineToRemove)) continue;
-    					    writer.write(currentLine + System.getProperty("line.separator"));
-    					}
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-          		    try {
-    					writer.close();
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				} 
-          		    try {
-    					reader.close();
-    				} catch (IOException e) {
-    					// TODO Auto-generated catch block
-    					e.printStackTrace();
-    				}
-          		            				
-          		inputFile.delete();
-          		tempFile.renameTo(inputFile);
-      		      		frame.dispose();
-      		      		new deletedmessage();
-      		      	}
-      		      	
-      		       
-      		      	else{
-      		      		frame.dispose();
-      		      		new errormessage2();
-      		      	};
-      		    
+      				delete(contents);
       			}});
       		button.setBorder(BorderFactory.createLineBorder(Color.blue));
       		
