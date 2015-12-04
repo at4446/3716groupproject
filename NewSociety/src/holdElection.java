@@ -8,7 +8,9 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.TreeMap;
@@ -20,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class holdElection extends members{
+public class holdElection {
 	
 	private JFrame frame;
 	private JFrame frame2;
@@ -76,9 +78,50 @@ public class holdElection extends members{
 				button= new JButton("Hold Election");
 				button.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e1){
+						int n =1;
 						selectedValue = list.getSelectedItem().toString();
+						String path = "./"+selectedValue + list.getSelectedIndex();
+						File file = new File(path);
+						if(file.exists()){
+							System.out.println("File exists");
+							try {
+								BufferedReader bf = new BufferedReader(new FileReader(file));
+								String string ="";
+								int line;
+								try {
+									while((bf.readLine()) !=null){
+										string+=bf.readLine(); // reading string
+										line = Integer.parseInt(string); // converting string to int
+										line +=n; // adding one vote
+										FileWriter fw = new FileWriter(file,false);	
+										fw.write(Integer.toString(n));
+									}
+									bf.close();
+								}
+								catch (IOException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
+							catch (FileNotFoundException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+						}
+						else{
+								File newfile = new File(selectedValue + list.getSelectedIndex()+ ".txt");
+								try {
+									PrintWriter out = new PrintWriter(newfile);									
+									out.write(Integer.toString(n));
+									out.close();
+								}
+								catch (FileNotFoundException e) {
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+							}
 						frame.dispose();
-						createFrame2(getMembers(selectedValue));
+						//createFrame2(getMembers(selectedValue));
 				}
 				});
 				
@@ -145,7 +188,7 @@ public class holdElection extends members{
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e1){//vote button doesnt't do anything yet
 				selectedValue = list.getSelectedItem().toString();
-				addVote(selectedValue);
+				//addVote(selectedValue);
 				frame.dispose();
 				new Start_window();
 							
@@ -157,7 +200,7 @@ public class holdElection extends members{
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				getVotes();
+				//getVotes();
 				frame.dispose();
 				new Start_window();
 				
@@ -183,19 +226,6 @@ public class holdElection extends members{
 	}		
 	
 	
-	public void getVotes(){
-		 int morevotes = 0, lessvotes = 0;
-		
-		for (String key : votes.keySet()){
-			if(votes.get(key) > lessvotes){
-				morevotes = votes.get(key);
-			}
-			else{
-				lessvotes = votes.get(key);
-			}
-		}
-		System.out.println(morevotes);
-	}
 	
 	public holdElection(){
 		createFrame1();
