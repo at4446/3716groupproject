@@ -30,7 +30,7 @@ public class DeleteSociety extends society{
 
 	public DeleteSociety() throws IOException{
 		
-		//Checks authorization if name equals president delete is good to go if not not allowed to delete
+		//Checks the  authorization if name equals president delete is good to go if not not allowed to delete
 		
 		
 		
