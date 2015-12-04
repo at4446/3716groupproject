@@ -22,7 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class holdElection {
+public class holdElection extends society{
 	
 	private JFrame frame;
 	private JFrame frame2;
@@ -78,9 +78,9 @@ public class holdElection {
 				button= new JButton("Hold Election");
 				button.addActionListener(new ActionListener(){
 					public void actionPerformed(ActionEvent e1){
-						int n =1;
+						//int n =1;
 						selectedValue = list.getSelectedItem().toString();
-						String path = "./"+selectedValue + list.getSelectedIndex();
+						/*String path = "./"+selectedValue + list.getSelectedIndex();
 						File file = new File(path);
 						if(file.exists()){
 							System.out.println("File exists");
@@ -90,11 +90,12 @@ public class holdElection {
 								int line;
 								try {
 									while((bf.readLine()) !=null){
-										string+=bf.readLine(); // reading string
+										string = bf.readLine(); // reading string
 										line = Integer.parseInt(string); // converting string to int
-										line +=n; // adding one vote
+										line += n; // adding one vote
 										FileWriter fw = new FileWriter(file,false);	
-										fw.write(Integer.toString(n));
+										fw.write(Integer.toString(line));
+										fw.close();
 									}
 									bf.close();
 								}
@@ -120,8 +121,9 @@ public class holdElection {
 									e.printStackTrace();
 								}
 							}
-						frame.dispose();
-						//createFrame2(getMembers(selectedValue));
+						System.out.println("vote is added");
+						frame.dispose();*/
+						createFrame2(getMembers(selectedValue));
 				}
 				});
 				
@@ -196,7 +198,7 @@ public class holdElection {
 		});
 		
 		button2 = new JButton("Vote over");
-		button.addActionListener(new ActionListener(){
+		button2.addActionListener(new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
