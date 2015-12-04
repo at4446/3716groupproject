@@ -14,7 +14,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,7 +32,7 @@ public String president;
 public String members;
 public String society;
 public String val;
-
+public Map<String, Integer> numofvotes= new TreeMap<String, Integer>();
 	//Sets a new president into president file
 	public void setPres(String pres){
 		president = pres;

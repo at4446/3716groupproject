@@ -10,6 +10,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -18,7 +20,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class holdElection extends society{
+public class holdElection extends members{
 	
 	private JFrame frame;
 	private JFrame frame2;
@@ -26,6 +28,8 @@ public class holdElection extends society{
 	private JComboBox list;
 	private String selectedValue;
 	private JButton button2;
+	public int total = 0;
+	public Map<String, Integer> votes= new TreeMap<String, Integer>();
 	
 	public void createFrame1(){ //Creates frame to select the society to hold an election
 		//set up label for frame
@@ -141,12 +145,24 @@ public class holdElection extends society{
 		button.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e1){//vote button doesnt't do anything yet
 				selectedValue = list.getSelectedItem().toString();
-				
+				addVote(selectedValue);
 				frame.dispose();
-				
-				
+				new Start_window();
+							
 		}
+		});
+		
+		button2 = new JButton("Vote over");
+		button.addActionListener(new ActionListener(){
 
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				getVotes();
+				frame.dispose();
+				new Start_window();
+				
+			}
+			
 		});
 		
 		//add to panel
@@ -157,16 +173,29 @@ public class holdElection extends society{
 		
 		
 	//add to frame
-		frame= new JFrame();
-		frame.add(Panel);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setTitle("Which society");
-		frame.setVisible(true);
-		frame.setLocation(400,200);
-		frame.setSize(600, 600);
+		frame2= new JFrame();
+		frame2.add(Panel);
+		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame2.setTitle("Which society");
+		frame2.setVisible(true);
+		frame2.setLocation(400,200);
+		frame2.setSize(600, 600);
 	}		
 	
 	
+	public void getVotes(){
+		 int morevotes = 0, lessvotes = 0;
+		
+		for (String key : votes.keySet()){
+			if(votes.get(key) > lessvotes){
+				morevotes = votes.get(key);
+			}
+			else{
+				lessvotes = votes.get(key);
+			}
+		}
+		System.out.println(morevotes);
+	}
 	
 	public holdElection(){
 		createFrame1();
