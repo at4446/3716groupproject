@@ -104,7 +104,17 @@ public class Start_window extends society {
 		btnEvent.setBounds(335, 149, 146, 25);
 		//btnMessageSociety.setBorder(BorderFactory.createLineBorder(Color.red));
 		frame.getContentPane().add(btnEvent);
-		
+		btnEvent.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				// TODO Auto-generated method stub
+				new Events();
+				frame.dispose();
+				
+			}
+			
+		});
 		//Creates Label
 
 		 

@@ -1,5 +1,6 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,6 +67,8 @@ public class DeleteSociety extends society{
       
         //Create button to click
       		button = new JButton("Delete Society");
+      	    button.setSize(12,18);
+            
       		button.addActionListener(new ActionListener(){
       			public void actionPerformed(ActionEvent e1){
       				contents = combo.getSelectedItem().toString();
@@ -134,13 +137,14 @@ public class DeleteSociety extends society{
       			}});
       		button.setBorder(BorderFactory.createLineBorder(Color.blue));
       		
-      		
+      	   
         
         //Add button to South position of panel
         button_panel = new JPanel();
         button_panel.setLayout(new BorderLayout());
-        button_panel.add(button, BorderLayout.SOUTH);
-        
+      
+        button_panel.add(button, BorderLayout.NORTH);
+        button.setPreferredSize(new Dimension(100, 40));
         //Add label and text field to panel
         panel = new JPanel();
         panel.setLayout(new GridLayout(6,2));

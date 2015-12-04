@@ -1,4 +1,6 @@
 import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -10,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -79,6 +82,7 @@ public class JoinSociety extends society{
 				memberName= JOptionPane.showInputDialog("Please input your name:");
 				System.out.println("The member name is: " + memberName);
 				setMembers(selectedValue ,memberName);
+				
 			}
 		});
 		
@@ -101,10 +105,16 @@ public class JoinSociety extends society{
 		
 		//add to panel
 		joinPanel = new JPanel();
+		
 		joinPanel.add(search);
 		joinPanel.add(list, BorderLayout.AFTER_LAST_LINE);
 		joinPanel.add(backButton, BorderLayout.SOUTH);
-		joinPanel.add(joinButton);
+		joinButton.setPreferredSize(new Dimension(100, 40));
+		joinPanel.add(joinButton, new GridLayout());
+		
+		
+		joinButton.setLocation(88, 0);
+		
 		
 		
 	//add to frame

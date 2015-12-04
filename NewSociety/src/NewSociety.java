@@ -86,8 +86,9 @@ public class NewSociety extends society implements ActionListener{
         input_panel.add(desc_text);
         input_panel.add(contact);
         input_panel.add(contact_text);
-        input_panel.add(button);
-        input_panel.add(backButton, BorderLayout.EAST);
+        input_panel.add(button, BorderLayout.WEST);
+        input_panel.add(backButton, BorderLayout.LINE_START);
+        
         // set up the frame and display it
         //frame.add(buttonpanel, BorderLayout.SOUTH);
     		//frame.getContentPane().add(buttonpanel);
