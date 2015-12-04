@@ -136,6 +136,7 @@ public class holdElection extends society{
 				
 			//add to frame
 				frame= new JFrame();
+				
 				frame.add(Panel);
 				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				frame.setTitle("Which society");
@@ -219,6 +220,7 @@ public class holdElection extends society{
 		
 	//add to frame
 		frame2= new JFrame();
+		
 		frame2.add(Panel);
 		frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame2.setTitle("Which society");

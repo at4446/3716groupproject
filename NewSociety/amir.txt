@@ -1,0 +1,1 @@
+societies name: amirStudents name: Students id: Major: Description: Contact Info: 

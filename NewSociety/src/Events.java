@@ -1,15 +1,20 @@
 
 import java.awt.EventQueue;
 
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
+
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
+import java.io.File;
+import java.io.IOException;
 
 public class Events {
 
@@ -45,7 +50,17 @@ public class Events {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.getContentPane().setForeground(Color.black);
+		try {
+			File currDir = new File(".");
+	    String path = currDir.getAbsolutePath();
+	    path = path.substring(0, path.length()-1);
+	    System.out.println(path);
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(path + "src/img.jpg")))));
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		frame.getContentPane().setForeground(Color.blue);
 		frame.getContentPane().setFont(new Font("Tahoma", Font.ITALIC, 15));
 		frame.setBounds(100, 100, 596, 491);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,13 +73,13 @@ public class Events {
 		frame.getContentPane().add(lblNewLabel);
 		
 		JLabel eventNameLabel = new JLabel("Event Name");
-		eventNameLabel.setForeground(Color.black);
+		eventNameLabel.setForeground(Color.red);
 		eventNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		eventNameLabel.setBounds(64, 137, 93, 14);
 		frame.getContentPane().add(eventNameLabel);
 		
 		JLabel desLabel = new JLabel("Description");
-		desLabel.setForeground(Color.black);
+		desLabel.setForeground(Color.red);
 		desLabel.setFont(new Font("Tahoma", Font.PLAIN, 17));
 		desLabel.setBounds(64, 211, 93, 14);
 		frame.getContentPane().add(desLabel);

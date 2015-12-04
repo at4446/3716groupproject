@@ -95,6 +95,7 @@ public class JoinSociety extends society{
 		});
 		
 		//add to panel
+		
 		joinPanel = new JPanel();
 		
 		joinPanel.add(search);
@@ -109,8 +110,10 @@ public class JoinSociety extends society{
 		
 		
 	//add to frame
+		
 		joinFrame= new JFrame();
 		joinFrame.add(joinPanel);
+		
 		joinFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		joinFrame.setTitle("Join Society");
 		joinFrame.setVisible(true);

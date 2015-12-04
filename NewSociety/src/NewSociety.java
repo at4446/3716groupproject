@@ -3,6 +3,7 @@
  * seperatly into a file containing its societies name*/
 
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 import java.io.*;
@@ -33,8 +34,10 @@ public class NewSociety extends society implements ActionListener{
     
     private JPanel input_panel;
     
+    
     //code for creating the society
     public void createSociety(){
+    	
     File f = new File(society_name_text.getText().toLowerCase() + ".txt");
 	if(f.exists() && !f.isDirectory()) { 
 	    new errormessage();
@@ -122,7 +125,18 @@ public class NewSociety extends society implements ActionListener{
         
         
         //ADD labels and input buttons TO PANEL
-        input_panel = new JPanel();
+    		try {
+    			File currDir = new File(".");
+    	    String path = currDir.getAbsolutePath();
+    	    path = path.substring(0, path.length()-1);
+    	    System.out.println(path);
+    			nsframe.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(path + "src/pic2.jpg")))));
+    		} catch (IOException e1) {
+    			// TODO Auto-generated catch block
+    			e1.printStackTrace();
+    		}
+    		input_panel = new JPanel();
+        
         input_panel.setLayout(new GridLayout(0,1));
         input_panel.add(society_name);
         input_panel.add(society_name_text);
@@ -143,6 +157,7 @@ public class NewSociety extends society implements ActionListener{
         //frame.add(buttonpanel, BorderLayout.SOUTH);
     		//frame.getContentPane().add(buttonpanel);
         nsframe.setLayout(new GridLayout(0,2));
+        
         nsframe.add(input_panel, BorderLayout.CENTER);
         nsframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         nsframe.setTitle("Create a New Society");

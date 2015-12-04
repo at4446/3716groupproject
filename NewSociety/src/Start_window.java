@@ -43,12 +43,15 @@ public class Start_window extends society {
 		
 		//background image
 		try {
-			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File("/Users/JY/git/3716groupproject/NewSociety/src/img.jpg")))));
+			File currDir = new File(".");
+	    String path = currDir.getAbsolutePath();
+	    path = path.substring(0, path.length()-1);
+	    System.out.println(path);
+			frame.setContentPane(new JLabel(new ImageIcon(ImageIO.read(new File(path + "src/img.jpg")))));
 		} catch (IOException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
 		
 		
 		//Creates create society button
