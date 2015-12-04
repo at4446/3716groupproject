@@ -22,7 +22,7 @@ import java.awt.event.*;
 	        button.addActionListener(this);
 	        panel.add(button, BorderLayout.SOUTH);
 			
-			// set up the frame and display it
+			// set up the frame and display it on the page
 	        
 			frame.add(panel);
 	        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
